@@ -18,13 +18,13 @@ export function middleware(req:Request,res:Response,next:NextFunction){
     const after_filter=val.data ;
     //barere
     try{
-        const decode=jwt.verify(after_filter,jwt_pass) as JwtPayload;
-        if(!decode){
-            return res.status(404).json({
-                success:false,
-                message:"Please check the password"
-            })
-        }
+        // const decode=jwt.verify(after_filter,jwt_pass) as JwtPayload;
+        // if(!decode){
+        //     return res.status(404).json({
+        //         success:false,
+        //         message:"Please check the password"
+        //     })
+        // }
         next();
     }catch(error){
         return res.status(500).json({

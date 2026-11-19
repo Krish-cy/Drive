@@ -42,7 +42,7 @@ model Folder {
   children Folder[] @relation("FolderHierarchy")
   made_at DateTime
 }
-
+//permission not completed
 model Permission {
   id String @id @default(uuid())
   ownerId String @unique

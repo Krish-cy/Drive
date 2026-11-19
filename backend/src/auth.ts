@@ -13,8 +13,7 @@ route.post("/signup",async(req,res)=>{
     }
     const {email,password}=valid.data;
     try{
-    
-
+      
     }catch(error){
         return res.status(500).json({
             success:false,
