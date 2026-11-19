@@ -12,20 +12,40 @@ datasource db {
   provider = "postgresql"
 }
 
-model user {
+model User {
   id       String @id @default(uuid())
   email    String
   password String
+  folderId Folder[]
+  fileId Files[]
 }
 
-model files {
+model Files {
   id String @id @default(uuid())
+  FileName String
+  ownerId String
+  owner User @relation(fields: [ownerId],references: [id])
+  s3Key String
+  parentId String?
+  parent Files? @relation("FileHierarchy",fields: [parentId],references: [id])
+  children Files[] @relation("FileHierarchy")
+  made_at DateTime
 }
 
-model folder {
+model Folder {
   id String @id @default(uuid())
+  folderName String
+  ownerId String
+  owner User @relation(fields: [ownerId],references: [id])
+  parentId String?
+  parent Folder? @relation("FolderHierarchy",fields: [parentId],references: [id])
+  children Folder[] @relation("FolderHierarchy")
+  made_at DateTime
 }
 
-model permission {
+model Permission {
   id String @id @default(uuid())
+  ownerId String @unique
+  permitId String @unique
+  made_at DateTime
 }
