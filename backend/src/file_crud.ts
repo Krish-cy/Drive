@@ -2,7 +2,7 @@ import express from 'express';
 const route=express.Router();
 
 
-route.get("/files",async(req,res)=>{
+route.get("/file",async(req,res)=>{
     try{
 
     }catch(error){
@@ -13,7 +13,7 @@ route.get("/files",async(req,res)=>{
     }
 })
 
-route.post("/make",async(req,res)=>{
+route.post("/add file",async(req,res)=>{
     try{
 
     }catch(error){

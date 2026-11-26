@@ -1,6 +1,6 @@
 import express from 'express';
 import { auth_validation } from './validation';
-import jwt, { type JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 const route=express.Router();
 import prisma from './db';
 import { error } from 'node:console';
@@ -67,6 +67,27 @@ route.post("/signin",async(req,res)=>{
     }
     const {email,password}=valid.data;
     try{
+    const is_present=await prisma.user.findUnique({where:{email}});
+     if(!is_present){
+        return res.status(402).json({
+            success:false,
+            message:"User not found! "
+        })
+     }
+     const token=jwt.sign(password,jwt_pass,{
+        expiresIn:'1h'
+     }) ;
+     if(!token){
+        return res.status(403).json({
+            success:false,
+            message:"Can,t generate the token"
+        })
+     }
+     return res.status(200).json({
+        success:true,
+        message:"Signup done successfully",
+        token:token
+     })
 
     }catch(error){
         return res.status(500).json({
