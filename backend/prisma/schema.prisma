@@ -34,7 +34,7 @@ model Files {
 
 model Folder {
   id String @id @default(uuid())
-  folderName String
+  folderName String @unique
   ownerId String
   owner User @relation(fields: [ownerId],references: [id])
   parentId String?

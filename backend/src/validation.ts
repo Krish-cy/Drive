@@ -9,3 +9,8 @@ export const auth_validation=zod.object({
 export const middleware_auth=zod.object({
     token:zod.string()
 })
+
+export const put_folder_validation=zod.object({
+    name:zod.string(),
+    existing_name:zod.string()
+})
